@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080a12" />
+  <meta name="description" content="SoundCanvas — turn your voice and favorite songs into living art. Entirely in your browser." />
+  <meta property="og:title" content="SoundCanvas — Make sound visible" />
+  <meta property="og:description" content="Speak, upload music, and create living art from sound." />
+  <title>SoundCanvas — Make sound visible</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="topbar shell">
+    <a class="brand" href="#home" aria-label="SoundCanvas home"><span class="brand-mark">◈</span><span>sound<span class="brand-accent">canvas</span></span><span class="beta">STUDIO</span></a>
+    <nav aria-label="Main navigation"><a href="#studio">Studio</a><a href="#challenges">Challenges</a><a href="#how">How it works</a></nav>
+    <div class="top-actions"><button id="languageBtn" class="quiet-btn" title="Change language">فا / EN</button><a class="github-btn" href="https://github.com/mobinveisy" target="_blank" rel="noopener">GitHub ↗</a></div>
+  </header>
+
+  <main>
+    <section class="hero shell" id="home">
+      <div class="hero-badge"><span class="live-dot"></span> YOUR SOUND, REIMAGINED</div>
+      <h1>Don't just hear it.<br><em>See your sound.</em></h1>
+      <p>Transform a voice, a song, or a single moment into an extraordinary piece of living art — right inside your browser.</p>
+      <div class="hero-buttons"><a class="primary-btn" href="#studio">Enter the studio <span>↗</span></a><a class="secondary-btn" href="#how">See how it works <span>↓</span></a></div>
+      <div class="hero-caption"><span class="tiny-stars">✦ ✧ ✦</span> No sign-up. No uploads to a server. Just creation.</div>
+    </section>
+
+    <section id="studio" class="studio shell">
+      <div class="section-head"><div><span class="eyebrow">01 / THE STUDIO</span><h2>Your creative universe.</h2></div><span class="status" id="statusPill"><span class="status-dot"></span><span id="statusText">Ready to create</span></span></div>
+      <div class="studio-layout">
+        <div class="visual-panel">
+          <div class="canvas-top"><span class="panel-label"><span class="small-icon">◉</span> LIVE CANVAS <span id="fpsTag">●</span></span><div class="canvas-tools"><span id="timeDisplay">00:00</span><button id="fullscreenBtn" class="icon-btn" aria-label="Fullscreen" title="Fullscreen">⛶</button></div></div>
+          <div class="canvas-wrap" id="canvasWrap"><canvas id="artCanvas" aria-label="Animated sound visualizer"></canvas><div class="canvas-grain"></div><div class="canvas-center" id="canvasOverlay"><span class="canvas-center-icon">✳</span><b>Your canvas is alive.</b><span>Choose an input to let your sound take over.</span></div><div class="canvas-watermark">SOUNDCANVAS <span>✦</span> LIVE ART</div><div id="recordingBadge" class="recording-badge hidden">● RECORDING <span id="recordTime">00:00</span></div></div>
+          <div class="transport"><button id="micBtn" class="transport-main" aria-pressed="false"><span class="transport-icon">♩</span><span><b>Use microphone</b><small>Turn your voice into art</small></span></button><label for="audioFile" class="transport-main upload"><span class="transport-icon">↑</span><span><b>Upload audio</b><small>MP3, WAV, M4A & more</small></span></label><input type="file" id="audioFile" accept="audio/*" hidden /><button id="demoBtn" class="transport-demo">▶ <span>Try demo</span></button></div>
+          <div class="nowplaying"><span class="song-icon">♫</span><div class="track-info"><b id="trackName">Nothing playing yet</b><small id="trackSubtitle">Try your microphone, a song, or the built-in demo</small></div><button class="round-play" id="playPauseBtn" disabled aria-label="Play or pause">▶</button><audio id="audioElement" preload="metadata" crossorigin="anonymous"></audio></div>
+        </div>
+        <aside class="controls">
+          <div class="controls-heading"><div><span class="eyebrow">CREATIVE CONTROLS</span><h3>Make it yours.</h3></div><button id="randomBtn" class="small-action" title="Randomize settings">⤨ Surprise me</button></div>
+          <div class="control-group"><label class="group-label">VISUAL STYLE</label><div class="styles" id="styles"><button class="style active" data-style="nebula"><span class="style-art nebula-art"></span><strong>Nebula</strong><small>Cosmic particles</small></button><button class="style" data-style="ink"><span class="style-art ink-art"></span><strong>Liquid Ink</strong><small>Organic flows</small></button><button class="style" data-style="pulse"><span class="style-art pulse-art"></span><strong>Pulse</strong><small>Electric energy</small></button></div></div>
+          <div class="control-group"><label class="group-label">COLOR UNIVERSE</label><div class="palette-list" id="palettes"><button class="palette active" data-palette="aurora" title="Aurora" style="--p1:#8d64ff;--p2:#2ce1d1;--p3:#f75ed8"></button><button class="palette" data-palette="sunset" title="Sunset" style="--p1:#ffbe68;--p2:#fe668d;--p3:#b958fb"></button><button class="palette" data-palette="ocean" title="Ocean" style="--p1:#52c5ff;--p2:#1a76ff;--p3:#94f5e3"></button><button class="palette" data-palette="ember" title="Ember" style="--p1:#ffb52e;--p2:#ff603c;--p3:#ef266c"></button><button class="palette" data-palette="mono" title="Moonlight" style="--p1:#fafaff;--p2:#9bb2d7;--p3:#7d90ff"></button></div></div>
+          <div class="control-group sliders"><label class="group-label">FINE TUNE</label><div class="slider-row"><label for="sensitivity">Sensitivity <output id="sensitivityValue">65%</output></label><input id="sensitivity" type="range" min="5" max="100" value="65" /></div><div class="slider-row"><label for="intensity">Intensity <output id="intensityValue">75%</output></label><input id="intensity" type="range" min="5" max="100" value="75" /></div><div class="slider-row"><label for="motion">Motion <output id="motionValue">60%</output></label><input id="motion" type="range" min="0" max="100" value="60" /></div><div class="slider-row"><label for="glow">Glow <output id="glowValue">70%</output></label><input id="glow" type="range" min="0" max="100" value="70" /></div></div>
+          <div class="control-group"><label class="group-label">CANVAS SETTINGS</label><div class="option-line"><span>Light background</span><button id="lightToggle" class="toggle" role="switch" aria-checked="false"><span></span></button></div><div class="option-line"><span>Export layout</span><select id="aspectSelect" aria-label="Export layout"><option value="9:16">9:16 · Story / Reel</option><option value="1:1">1:1 · Square</option><option value="16:9">16:9 · Landscape</option></select></div><div class="option-line"><span>Output quality</span><select id="qualitySelect" aria-label="Output quality"><option value="high">High</option><option value="standard">Standard</option></select></div></div>
+          <div class="control-group actions"><label class="group-label">CAPTURE YOUR CREATION</label><div class="export-grid"><button id="pngBtn">↓ <span>Save artwork<small>PNG image</small></span></button><button id="recordBtn">● <span>Record video<small>WebM / supported format</small></span></button></div><button class="share-btn" id="shareBtn">↗ Share this experience</button></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="signature shell" id="signature"><div class="signature-copy"><span class="eyebrow">02 / MAKE IT PERSONAL</span><h2>Every sound has<br><em>a signature.</em></h2><p>Capture your current artwork and turn it into your personal sound identity — a downloadable, shareable piece made just for you.</p><label for="signatureName">NAME YOUR ARTWORK</label><div class="signature-input"><input id="signatureName" maxlength="34" placeholder="Your name or a special moment..." /><button id="signatureBtn">Create signature ↗</button></div><small class="hint">Your artwork is created privately on your device.</small></div><div class="signature-preview"><div class="signature-preview-top">SOUND / SIGNATURE <span>✳</span></div><div class="signature-orb"><div class="orb-core"></div></div><div class="signature-preview-bottom"><span id="signaturePreviewName">YOUR UNIQUE FREQUENCY</span><span id="signaturePreviewCode">SC — ••••••••</span></div></div></section>
+
+    <section class="challenge-section shell" id="challenges"><div class="section-head"><div><span class="eyebrow">03 / LET'S PLAY</span><h2>Make some noise.</h2></div><p>Different sounds. Different art. Give your voice a challenge.</p></div><div class="challenge-grid"><button class="challenge-card" data-challenge="name"><span class="challenge-number">01</span><span class="challenge-emoji">✳</span><strong>Say your name</strong><span>Discover what your own name looks like.</span><span class="challenge-cta">Try this challenge ↗</span></button><button class="challenge-card" data-challenge="laugh"><span class="challenge-number">02</span><span class="challenge-emoji">☺</span><strong>Laugh out loud</strong><span>What shape does your happiest sound make?</span><span class="challenge-cta">Try this challenge ↗</span></button><button class="challenge-card" data-challenge="sing"><span class="challenge-number">03</span><span class="challenge-emoji">♫</span><strong>Sing a note</strong><span>Hold a note, then watch your art transform.</span><span class="challenge-cta">Try this challenge ↗</span></button><button class="challenge-card" data-challenge="whisper"><span class="challenge-number">04</span><span class="challenge-emoji">☾</span><strong>Whisper a secret</strong><span>See the delicate patterns of a quiet voice.</span><span class="challenge-cta">Try this challenge ↗</span></button></div></section>
+
+    <section class="how-section shell" id="how"><div><span class="eyebrow">04 / THE MAGIC, EXPLAINED</span><h2>Real sound.<br><em>Real-time art.</em></h2><p>Built with the Web Audio API and Canvas. Your audio is analyzed locally, then its frequencies and energy drive every pixel of the experience. No account, cloud processing, or expensive API.</p></div><div class="steps"><div><span>01</span><div><b>Choose your sound</b><p>Speak into your mic, upload a song, or launch demo mode.</p></div></div><div><span>02</span><div><b>Shape your universe</b><p>Explore different styles, colors, motion, and reactive effects.</p></div></div><div><span>03</span><div><b>Make it yours</b><p>Save a screenshot, record video, or craft a personal signature.</p></div></div></div></section>
+  </main>
+  <footer class="footer shell"><a class="brand footer-brand" href="#home"><span class="brand-mark">◈</span><span>sound<span class="brand-accent">canvas</span></span></a><div class="footer-right"><span>Made with 🧠 by <a href="https://t.me/mobinmind" target="_blank" rel="noopener noreferrer">Mobin Veisy</a></span><a href="https://t.me/mobinmind" target="_blank" rel="noopener noreferrer">t.me/mobinmind ↗</a></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Artwork export"><div class="modal-backdrop" id="modalBackdrop"></div><div class="modal-card"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div class="modal-body" id="modalBody"></div></div></div>
+  <script src="app.js"></script>
+</body>
+</html>
